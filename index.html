@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vakinha - Sua doação é um ato de amor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #22c55e;
+            --primary-dark: #16a34a;
+            --primary-light: #dcfce7;
+            --slate-900: #0f172a;
+            --slate-800: #1e293b;
+            --slate-700: #334155;
+            --slate-600: #475569;
+            --slate-300: #cbd5e1;
+            --slate-200: #e2e8f0;
+            --slate-100: #f1f5f9;
+            --red-600: #dc2626;
+            --green-50: #f0fdf4;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #ffffff;
+            color: var(--slate-900);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 42rem;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container img {
+            height: 4rem;
+            width: auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--slate-300);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-prefix {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--slate-300);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            width: 8rem;
+        }
+
+        .input-prefix span {
+            background-color: var(--slate-100);
+            color: var(--slate-700);
+            font-weight: 500;
+            padding: 0.5rem 0.75rem;
+            border-right: 1px solid var(--slate-300);
+        }
+
+        .input-prefix input {
+            flex: 1;
+            border: none;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .error-message {
+            color: var(--red-600);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .button-cell {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .button-cell .spacing {
+            height: 0.25rem;
+        }
+
+        .preset-button {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: 2px solid var(--slate-200);
+            background-color: #ffffff;
+            color: var(--slate-700);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .preset-button:hover {
+            border-color: var(--slate-300);
+        }
+
+        .preset-button.selected {
+            border-color: var(--primary-color);
+            background-color: var(--green-50);
+            color: var(--primary-color);
+        }
+
+        .preset-button.highlighted {
+            border-color: var(--primary-color);
+            background-color: var(--green-50);
+            color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: var(--green-50);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid var(--primary-color);
+        }
+
+        .payment-method-check {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .payment-method-text {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.875rem;
+            color: var(--slate-600);
+            margin-bottom: 1rem;
+        }
+
+        .additional-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .item-card {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid var(--slate-200);
+            background-color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .item-card:hover {
+            border-color: var(--slate-300);
+        }
+
+        .item-card.selected {
+            border-color: var(--primary-color);
+            background-color: var(--green-50);
+        }
+
+        .item-image {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .item-image img {
+            height: 4rem;
+            width: auto;
+        }
+
+        .item-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--slate-700);
+            margin-bottom: 0.25rem;
+        }
+
+        .item-price {
+            font-size: 0.875rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .summary {
+            padding: 1rem;
+            border-top: 1px solid var(--slate-200);
+            border-bottom: 1px solid var(--slate-200);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            color: var(--slate-700);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: var(--slate-900);
+        }
+
+        .button-submit {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            font-size: 1.125rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button-submit:hover:not(:disabled) {
+            background-color: var(--primary-dark);
+        }
+
+        .button-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .disclaimer {
+            font-size: 0.75rem;
+            color: var(--slate-600);
+            text-align: center;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: var(--slate-100);
+            border: 2px solid var(--slate-300);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem auto;
+            max-width: 24rem;
+        }
+
+        .security-badge img {
+            height: 3rem;
+            width: 3rem;
+            flex-shrink: 0;
+        }
+
+        .security-badge-text {
+            font-size: 0.875rem;
+            color: var(--slate-600);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-card {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 28rem;
+        }
+
+        .modal-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .modal-header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--slate-200);
+        }
+
+        .modal-header img {
+            max-width: 100%;
+            width: auto;
+            height: 8rem;
+            object-fit: contain;
+        }
+
+        .modal-title {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: var(--slate-900);
+        }
+
+        .modal-subtitle {
+            font-size: 0.875rem;
+            color: var(--slate-600);
+        }
+
+        .modal-value {
+            text-align: center;
+        }
+
+        .modal-value-label {
+            font-size: 0.875rem;
+            color: var(--slate-600);
+        }
+
+        .modal-value-amount {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .qr-code-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .qr-code-box {
+            background-color: var(--slate-100);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .qr-code-box canvas {
+            width: 150px;
+            height: 150px;
+        }
+
+        .pix-copy-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .pix-copy-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            text-align: center;
+        }
+
+        .pix-copy-box {
+            background-color: var(--slate-100);
+            border: 1px solid var(--slate-200);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+        }
+
+        .pix-copy-box p {
+            font-size: 0.75rem;
+            font-family: monospace;
+            color: var(--slate-900);
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+
+        .button-copy {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .button-copy:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .instructions {
+            background-color: var(--slate-100);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .instructions-title {
+            font-weight: bold;
+            color: var(--slate-900);
+            text-align: center;
+        }
+
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .instruction-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: var(--slate-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.875rem;
+        }
+
+        .instruction-text {
+            font-size: 0.75rem;
+            color: var(--slate-700);
+        }
+
+        .payment-success {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .success-check {
+            font-size: 3.75rem;
+            color: var(--primary-color);
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--slate-900);
+        }
+
+        .success-message {
+            color: var(--slate-600);
+        }
+
+        .button-close {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button-close:hover {
+            background-color: var(--primary-dark);
+        }
+
+        @media (max-width: 640px) {
+            .additional-items {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-header img {
+                height: 5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main style="min-height: 100vh; background-color: #ffffff; padding: 2rem 1rem;">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo-container">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" alt="Vakinha">
+            </div>
+
+            <!-- Form -->
+            <form id="checkoutForm">
+                <!-- Nome do Doador -->
+                <div>
+                    <label for="donorName">Seu nome</label>
+                    <input type="text" id="donorName" placeholder="Digite seu nome">
+                    <div id="nameError" class="error-message" style="display: none;">Campo obrigatório</div>
+                </div>
+
+                <!-- Valor da Contribuição -->
+                <div>
+                    <label>Valor da contribuição</label>
+                    <div class="input-group">
+                        <div class="input-prefix">
+                            <span>R$</span>
+                            <input type="number" id="mainAmount" placeholder="Digite" step="0.01" min="0">
+                        </div>
+                    </div>
+
+                    <div id="minAmountError" class="error-message" style="display: none;">Valor mínimo da doação é de R$ 15,00</div>
+
+                    <!-- Botões de Valores Pré-definidos -->
+                    <div class="button-grid" id="presetButtons">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+
+                <!-- Forma de Pagamento -->
+                <div>
+                    <label>Forma de pagamento</label>
+                    <div class="payment-method">
+                        <div class="payment-method-check">✓</div>
+                        <span class="payment-method-text">Pix</span>
+                    </div>
+                </div>
+
+                <!-- Turbine sua doação -->
+                <div>
+                    <p class="section-title">Turbine sua doação</p>
+                    <p class="section-subtitle">Ajude MUITO MAIS turbinando sua doação 💚</p>
+                    <div class="additional-items" id="additionalItems">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+
+                <!-- Resumo -->
+                <div class="summary">
+                    <div class="summary-row">
+                        <span>Contribuição</span>
+                        <span id="contributionAmount">R$ 0,00</span>
+                    </div>
+                    <div class="summary-row" id="additionalRow" style="display: none;">
+                        <span>Itens adicionais</span>
+                        <span id="additionalAmount">R$ 0,00</span>
+                    </div>
+                    <div class="summary-total">
+                        <span>Total:</span>
+                        <span id="totalAmount">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <!-- Botão Contribuir -->
+                <button type="submit" class="button-submit" id="submitButton">CONTRIBUIR</button>
+
+                <!-- Disclaimer -->
+                <p class="disclaimer">
+                    Ao clicar no botão acima você declara que é maior de 18 anos, está de acordo com os Termos, Taxas e Prazos
+                </p>
+
+                <!-- Security Badge -->
+                <div class="security-badge">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" alt="Segurança">
+                    <p class="security-badge-text">Garantimos uma experiência segura para todos os nossos doadores.</p>
+                </div>
+
+                <p class="disclaimer">
+                    Informações que o preenchimento de seu cadastro completo estará disponível em seu painel pessoal na plataforma pela consulta deste usuário. Importante ler e compreender a nossa política de privacidade dos nossos doadores.
+                </p>
+            </form>
+        </div>
+    </main>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-card">
+            <div class="modal-content" id="modalContent">
+                <!-- Conteúdo gerado dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // Estado da aplicação
+        const state = {
+            amount: 0,
+            selectedItems: [],
+            loading: false,
+            transactionId: null,
+            pixData: null,
+            paymentStatus: 'PENDING',
+            timeLeft: 600
+        };
+
+        // Valores pré-definidos
+        const PRESET_VALUES = [30, 50, 75, 100, 200, 500, 750, 1000];
+
+        // Itens adicionais
+        const ADDITIONAL_ITEMS = [
+            { id: 'transport', label: 'Auxílio transporte', price: 15, image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==' },
+            { id: 'medicine', label: 'Ajuda medicações', price: 25, image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==' },
+            { id: 'basket', label: 'Doar cesta básica', price: 85, image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==' }
+        ];
+
+        // URL da API Vercel - CONFIGURE AQUI COM SUA URL DA VERCEL
+        const API_URL = 'https://projeto-phi-orcin.vercel.app';
+
+        // Images
+        const IMAGES = {
+            logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+            shield: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+            transport: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+            medicine: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+            basket: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+            header: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=='
+        };
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update logo
+            const logoImg = document.querySelector('.logo-container img');
+            if (logoImg) logoImg.src = IMAGES.logo;
+            
+            // Update shield
+            const shieldImg = document.querySelector('.security-badge img');
+            if (shieldImg) shieldImg.src = IMAGES.shield;
+            
+            initializePresetButtons();
+            initializeAdditionalItems();
+            setupEventListeners();
+            updateSummary();
+        });
+
+        function initializePresetButtons() {
+            const container = document.getElementById('presetButtons');
+            container.innerHTML = '';
+
+            PRESET_VALUES.forEach(value => {
+                const cell = document.createElement('div');
+                cell.className = 'button-cell';
+                
+                const spacer = document.createElement('div');
+                spacer.className = 'spacing';
+                
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'preset-button';
+                if (value === 50) button.classList.add('highlighted');
+                
+                button.innerHTML = `
+                    R$ ${value.toLocaleString('pt-BR')}
+                    ${value === 50 ? '<svg style="width: 1rem; height: 1rem;" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>' : ''}
+                `;
+                
+                button.onclick = (e) => {
+                    e.preventDefault();
+                    state.amount = value;
+                    updatePresetButtons();
+                    updateSummary();
+                };
+
+                cell.appendChild(spacer);
+                cell.appendChild(button);
+                container.appendChild(cell);
+            });
+        }
+
+        function updatePresetButtons() {
+            const buttons = document.querySelectorAll('.preset-button');
+            buttons.forEach((btn, idx) => {
+                const value = PRESET_VALUES[idx];
+                btn.classList.remove('selected', 'highlighted');
+                if (state.amount === value) {
+                    btn.classList.add('selected');
+                }
+                if (value === 50 && state.amount !== 50) {
+                    btn.classList.add('highlighted');
+                }
+            });
+        }
+
+        function initializeAdditionalItems() {
+            const container = document.getElementById('additionalItems');
+            container.innerHTML = '';
+
+            ADDITIONAL_ITEMS.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                if (state.selectedItems.includes(item.id)) card.classList.add('selected');
+
+                card.innerHTML = `
+                    <div class="item-image">
+                        <img src="${item.image}" alt="${item.label}">
+                    </div>
+                    <p class="item-label">${item.label}</p>
+                    <p class="item-price">R$ ${item.price.toFixed(2)}</p>
+                `;
+
+                card.onclick = () => toggleItem(item.id);
+                container.appendChild(card);
+            });
+        }
+
+        function toggleItem(id) {
+            if (state.selectedItems.includes(id)) {
+                state.selectedItems = state.selectedItems.filter(i => i !== id);
+            } else {
+                state.selectedItems.push(id);
+            }
+            initializeAdditionalItems();
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const mainAmount = state.amount;
+            const additionalAmount = state.selectedItems.reduce((sum, itemId) => {
+                const item = ADDITIONAL_ITEMS.find(i => i.id === itemId);
+                return sum + (item?.price || 0);
+            }, 0);
+            const total = mainAmount + additionalAmount;
+
+            document.getElementById('contributionAmount').textContent = `R$ ${mainAmount.toFixed(2)}`;
+            
+            const additionalRow = document.getElementById('additionalRow');
+            if (additionalAmount > 0) {
+                additionalRow.style.display = 'flex';
+                document.getElementById('additionalAmount').textContent = `R$ ${additionalAmount.toFixed(2)}`;
+            } else {
+                additionalRow.style.display = 'none';
+            }
+
+            document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
+
+            // Validar e atualizar botão
+            updateSubmitButton(mainAmount, total);
+        }
+
+        function updateSubmitButton(mainAmount, total) {
+            const name = document.getElementById('donorName').value.trim();
+            const isValid = name && total > 0 && mainAmount >= 15;
+            document.getElementById('submitButton').disabled = !isValid;
+        }
+
+        function setupEventListeners() {
+            document.getElementById('mainAmount').addEventListener('change', (e) => {
+                state.amount = parseFloat(e.target.value) || 0;
+                updatePresetButtons();
+                updateSummary();
+                validateAmount();
+            });
+
+            document.getElementById('mainAmount').addEventListener('input', (e) => {
+                state.amount = parseFloat(e.target.value) || 0;
+                updatePresetButtons();
+                updateSummary();
+            });
+
+            document.getElementById('donorName').addEventListener('change', () => {
+                validateName();
+                updateSummary();
+            });
+
+            document.getElementById('checkoutForm').addEventListener('submit', handleSubmit);
+        }
+
+        function validateName() {
+            const name = document.getElementById('donorName').value.trim();
+            const errorEl = document.getElementById('nameError');
+            if (!name) {
+                errorEl.style.display = 'block';
+            } else {
+                errorEl.style.display = 'none';
+            }
+        }
+
+        function validateAmount() {
+            const mainAmount = state.amount;
+            const errorEl = document.getElementById('minAmountError');
+            if (mainAmount > 0 && mainAmount < 15) {
+                errorEl.style.display = 'block';
+            } else {
+                errorEl.style.display = 'none';
+            }
+        }
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('donorName').value.trim();
+            const mainAmount = state.amount;
+            const additionalAmount = state.selectedItems.reduce((sum, itemId) => {
+                const item = ADDITIONAL_ITEMS.find(i => i.id === itemId);
+                return sum + (item?.price || 0);
+            }, 0);
+            const total = mainAmount + additionalAmount;
+
+            validateName();
+            validateAmount();
+
+            if (!name || total <= 0 || mainAmount < 15) {
+                alert('Por favor, preencha todos os campos corretamente');
+                return;
+            }
+
+            state.loading = true;
+            document.getElementById('submitButton').disabled = true;
+
+            try {
+                const apiUrl = `${API_URL}/api/checkout`;
+                console.log('[v0] Making request to:', apiUrl);
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        amount: total,
+                        customer: {
+                            name: name,
+                            email: 'cliente@lirapay.com',
+                            phone: '11999999999',
+                            document: '11144477735'
+                        }
+                    })
+                });
+
+                console.log('[v0] Response status:', response.status);
+                const text = await response.text();
+                console.log('[v0] Response text:', text);
+
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    console.error('[v0] Failed to parse JSON:', e);
+                    throw new Error('Servidor retornou resposta inválida. Verifique se o arquivo está hospedado corretamente.');
+                }
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'Erro ao criar transação');
+                }
+
+                state.transactionId = data.transactionId;
+                state.pixData = data.pix;
+                state.paymentStatus = 'PENDING';
+                state.timeLeft = 600;
+
+                openPaymentModal(total);
+                startPaymentPolling();
+            } catch (error) {
+                console.error('Erro:', error);
+                alert(error.message || 'Erro ao processar pagamento');
+            } finally {
+                state.loading = false;
+                document.getElementById('submitButton').disabled = false;
+            }
+        }
+
+        function openPaymentModal(total) {
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="modal-header">
+                    <img src="${IMAGES.header}" alt="Vakinha">
+                </div>
+
+                <div style="text-align: center; display: flex; flex-direction: column; gap: 0.25rem;">
+                    <h3 class="modal-title">Opção Selecionada</h3>
+                    <p class="modal-subtitle">Doe amor, doe esperança</p>
+                </div>
+
+                <div class="modal-value">
+                    <p class="modal-value-label">Valor total:</p>
+                    <p class="modal-value-amount">R$ ${total.toFixed(2)}</p>
+                </div>
+
+                <div style="text-align: center;">
+                    <p style="font-size: 0.875rem; color: var(--slate-700);">
+                        Escaneie o QR Code ou copie o código Pix abaixo para finalizar o pagamento.
+                    </p>
+                </div>
+
+                <div class="qr-code-container">
+                    <div class="qr-code-box" id="qrCodeContainer"></div>
+                </div>
+
+                <div class="pix-copy-section">
+                    <p class="pix-copy-label">COPIA E COLA</p>
+                    <div class="pix-copy-box">
+                        <p id="pixPayload">${state.pixData?.payload || ''}</p>
+                    </div>
+                    <button type="button" class="button-copy" onclick="copyToClipboard()">
+                        <span>📋</span>
+                        <span id="copyButtonText">COPIAR</span>
+                    </button>
+                </div>
+
+                <div class="instructions">
+                    <p class="instructions-title">Como pagar?</p>
+                    <div class="instruction-item">
+                        <div class="instruction-icon">📱</div>
+                        <p class="instruction-text">Escaneie o QR Code ou copie e cole o código Pix em seu app bancário ou carteira digital.</p>
+                    </div>
+                    <div class="instruction-item">
+                        <div class="instruction-icon">✓</div>
+                        <p class="instruction-text">Seu pagamento será aprovado em alguns instantes.</p>
+                    </div>
+                </div>
+            `;
+
+            // Gerar QR Code
+            document.getElementById('qrCodeContainer').innerHTML = '';
+            new QRCode(document.getElementById('qrCodeContainer'), {
+                text: state.pixData?.payload || '',
+                width: 150,
+                height: 150
+            });
+
+            document.getElementById('paymentModal').classList.add('open');
+        }
+
+        function copyToClipboard() {
+            const pixPayload = state.pixData?.payload || '';
+            navigator.clipboard.writeText(pixPayload).then(() => {
+                const btn = document.getElementById('copyButtonText');
+                const originalText = btn.textContent;
+                btn.textContent = 'COPIADO!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('open');
+        }
+
+        function startPaymentPolling() {
+            const interval = setInterval(async () => {
+                if (!state.transactionId) return;
+
+                try {
+                    const response = await fetch(`${window.location.origin}/api/checkout/${state.transactionId}`);
+                    const data = await response.json();
+                    state.paymentStatus = data.status;
+
+                    if (data.status === 'AUTHORIZED') {
+                        clearInterval(interval);
+                        showPaymentSuccess();
+                    }
+                } catch (error) {
+                    console.error('Erro ao verificar status:', error);
+                }
+            }, 3000);
+
+            // Parar polling após 10 minutos
+            setTimeout(() => clearInterval(interval), 600000);
+        }
+
+        function showPaymentSuccess() {
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="payment-success">
+                    <div class="success-check">✓</div>
+                    <h2 class="success-title">Pagamento Aprovado!</h2>
+                    <p class="success-message">Sua transação foi processada com sucesso.</p>
+                    <button type="button" class="button-close" onclick="closePaymentModal()">Fechar</button>
+                </div>
+            `;
+        }
+
+        // Fechar modal clicando fora
+        document.getElementById('paymentModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('paymentModal')) {
+                closePaymentModal();
+            }
+        });
+    </script>
+</body>
+</html>
